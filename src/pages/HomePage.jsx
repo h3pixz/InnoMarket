@@ -1,20 +1,25 @@
 import { useGetProductsQuery } from '../app/api';
+import CategoryTabs from '../components/CategoryTabs';
 import ProductCard from '../components/ProductCard';
 import '../styles/catalog.css';
 
 export default function HomePage() {
   const { data, isLoading, isError } = useGetProductsQuery();
 
-  if (isLoading) return <p>Loading…</p>;
-  if (isError) return <p>Failed to load products</p>;
-
   return (
-    <section className="catalog">
-      <div className="catalog__grid">
-        {data.products.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div>
-    </section>
+    <>
+      <CategoryTabs />
+      <section className="catalog">
+        {isLoading && <p>Loading…</p>}
+        {isError && <p>Failed to load products</p>}
+        {data && (
+          <div className="catalog__grid">
+            {data.products.map((product) => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        )}
+      </section>
+    </>
   );
 }
