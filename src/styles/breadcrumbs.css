@@ -1,0 +1,20 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+}
+
+.breadcrumbs__crumb {
+  color: #e55a63;
+  cursor: pointer;
+}
+
+.breadcrumbs__crumb--current {
+  color: #6b7280;
+  cursor: default;
+}
+
+.breadcrumbs__separator {
+  color: #6b7280;
+}
