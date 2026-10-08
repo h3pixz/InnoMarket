@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { getMockDetails } from '../mocks/productDetails';
 import { formatPrice } from '../utils/format';
@@ -12,34 +13,27 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="product-card">
-      <div className="product-card__media">
-        <img
-          className="product-card__image"
-          src={product.thumbnail}
-          alt={product.title}
-        />
-        <button
-          type="button"
-          className="product-card__fav"
-          aria-label="Add to favorites"
-        >
-          <FaHeart />
-        </button>
-        <div className="product-card__tags">
-          {tags.map((tag) => (
-            <span
-              key={tag}
-              className={`product-card__tag product-card__tag--${tag.toLowerCase()}`}
-            >
-              {tag}
-            </span>
-          ))}
+      <Link className="product-card__link" to={`/product/${product.id}`}>
+        <div className="product-card__media">
+          <img
+            className="product-card__image"
+            src={product.thumbnail}
+            alt={product.title}
+          />
+          <div className="product-card__tags">
+            {tags.map((tag) => (
+              <span
+                key={tag}
+                className={`product-card__tag product-card__tag--${tag.toLowerCase()}`}
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="product-card__body">
-        <h3 className="product-card__title">{title}</h3>
-        <div className="product-card__footer">
+        <div className="product-card__body">
+          <h3 className="product-card__title">{title}</h3>
           <p className="product-card__price">
             {formatPrice(product.price)}
             {oldPrice && (
@@ -48,15 +42,24 @@ export default function ProductCard({ product }) {
               </span>
             )}
           </p>
-          <button
-            type="button"
-            className="product-card__cart"
-            aria-label="Add to cart"
-          >
-            <FaShoppingCart />
-          </button>
         </div>
-      </div>
+      </Link>
+
+      <button
+        type="button"
+        className="product-card__fav"
+        aria-label="Add to favorites"
+      >
+        <FaHeart />
+      </button>
+
+      <button
+        type="button"
+        className="product-card__cart"
+        aria-label="Add to cart"
+      >
+        <FaShoppingCart />
+      </button>
     </article>
   );
 }
