@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoIosSearch } from "react-icons/io";
 import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
@@ -44,10 +44,10 @@ export default function Header() {
             <span className="header__number">{favoritesCount}</span>
           </button>
 
-          <button type="button" className="header__action" aria-label="Cart">
+          <Link to="/reserved" className="header__action" aria-label="Cart">
             <FaShoppingCart />
             <span className="header__number">{cartCount}</span>
-          </button>
+          </Link>
 
           <button type="button" className="header__profile" aria-label="Profile">
             <FaUser />

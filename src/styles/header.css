@@ -102,6 +102,7 @@
   border: 0;
   cursor: pointer;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .header__number {
