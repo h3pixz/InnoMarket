@@ -12,13 +12,13 @@ export default function Header() {
   return (
     <header className="header">
       <div className="header__bar">
-        <div className="header__brand">
+        <Link to="/" className="header__brand">
           <img className="header__logo" src={logo} alt="InnoMarket" />
           <div className="header__titles">
             <p className="header__title">Inno</p>
             <p className="header__title">Market</p>
           </div>
-        </div>
+        </Link>
         <div className="header__searchbox">
           <IoIosSearch className="header__icon" />
           <input className="header__search" type="search" aria-label="Search" />
