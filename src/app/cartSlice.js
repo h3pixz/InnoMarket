@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { loadCartState } from './storage';
+
+const persisted = loadCartState();
 
 const initialState = {
-  items: [],
-  favoriteIds: [],
+  items: persisted?.items ?? [],
+  favoriteIds: persisted?.favoriteIds ?? [],
 };
 
 const cartSlice = createSlice({
