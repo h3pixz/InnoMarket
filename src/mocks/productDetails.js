@@ -1,8 +1,10 @@
-const SIZES = ['XS', 'S', 'M', 'L', 'XL', '36', '36,5', '38', '42', '44'];
+const COLORS = ['Black', 'White', 'Red', 'Brown', 'Grey', 'Green', 'Blue'];
+const DELIVERY = ['1-3 working days', '1-5 working days'];
 
 export function getMockDetails(product) {
   const seed = product.id;
-  const size = SIZES[seed % SIZES.length];
+  const color = COLORS[seed % COLORS.length];
+  const deliveryTime = DELIVERY[seed % DELIVERY.length];
   const tags = seed % 3 === 0 ? ['New', 'Reserved'] : ['New'];
-  return { size, tags };
+  return { color, deliveryTime, tags };
 }

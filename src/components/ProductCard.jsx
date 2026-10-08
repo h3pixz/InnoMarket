@@ -5,11 +5,11 @@ import { formatPrice } from '../utils/format';
 import '../styles/product-card.css';
 
 export default function ProductCard({ product }) {
-  const { size, tags } = getMockDetails(product);
+  const { tags } = getMockDetails(product);
   const oldPrice = product.discountPercentage
     ? product.price / (1 - product.discountPercentage / 100)
     : null;
-  const title = [product.title, product.brand, size].filter(Boolean).join(' - ');
+  const title = [product.title, product.brand].filter(Boolean).join(' - ');
 
   return (
     <article className="product-card">
