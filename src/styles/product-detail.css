@@ -197,6 +197,11 @@
   color: #e55a63;
 }
 
+.product-detail__fav--active {
+  color: #e55a63;
+  border-color: #e55a63;
+}
+
 .product-detail__description {
   margin: 8px 0 0;
   line-height: 1.6;

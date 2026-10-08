@@ -1,9 +1,14 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { IoIosSearch } from "react-icons/io";
 import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
+import { selectCartCount, selectFavoritesCount } from "../app/cartSlice";
 import logo from "../assets/logo.png";
 
 export default function Header() {
+  const favoritesCount = useSelector(selectFavoritesCount);
+  const cartCount = useSelector(selectCartCount);
+
   return (
     <header className="header">
       <div className="header__bar">
@@ -36,12 +41,12 @@ export default function Header() {
         <div className="header__actions">
           <button type="button" className="header__action" aria-label="Favorites">
             <FaHeart />
-            <span className="header__number">0</span>
+            <span className="header__number">{favoritesCount}</span>
           </button>
 
           <button type="button" className="header__action" aria-label="Cart">
             <FaShoppingCart />
-            <span className="header__number">1</span>
+            <span className="header__number">{cartCount}</span>
           </button>
 
           <button type="button" className="header__profile" aria-label="Profile">

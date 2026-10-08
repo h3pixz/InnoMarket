@@ -1,7 +1,15 @@
 import { useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoIosArrowDown } from 'react-icons/io';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { useGetProductByIdQuery } from '../app/api';
+import {
+  addToCart,
+  removeFromCart,
+  selectIsFavorite,
+  selectIsInCart,
+  toggleFavorite,
+} from '../app/cartSlice';
 import Breadcrumbs from '../components/Breadcrumbs';
 import ProductGallery from '../components/ProductGallery';
 import { getMockDetails } from '../mocks/productDetails';
@@ -10,7 +18,10 @@ import '../styles/product-detail.css';
 
 export default function ProductPage() {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const { data, isLoading, isError } = useGetProductByIdQuery(id);
+  const isInCart = useSelector(selectIsInCart(Number(id)));
+  const isFavorite = useSelector(selectIsFavorite(Number(id)));
 
   if (isLoading) return <p>Loading…</p>;
   if (isError) return <p>Failed to load product</p>;
@@ -21,6 +32,11 @@ export default function ProductPage() {
     : null;
   const title = [data.title, data.brand].filter(Boolean).join(' - ');
   const freeShippingFrom = 34 + (data.id % 3) * 8;
+
+  const handleCart = () => {
+    if (isInCart) dispatch(removeFromCart(data.id));
+    else dispatch(addToCart(data));
+  };
 
   return (
     <section className="product-detail">
@@ -74,14 +90,23 @@ export default function ProductPage() {
           </p>
 
           <div className="product-detail__actions">
-            <button type="button" className="product-detail__cart">
+            <button
+              type="button"
+              className="product-detail__cart"
+              onClick={handleCart}
+            >
               <FaShoppingCart />
-              <span>Add to cart</span>
+              <span>{isInCart ? 'Added' : 'Add to cart'}</span>
             </button>
             <button
               type="button"
-              className="product-detail__fav"
+              className={
+                isFavorite
+                  ? 'product-detail__fav product-detail__fav--active'
+                  : 'product-detail__fav'
+              }
               aria-label="Add to favorites"
+              onClick={() => dispatch(toggleFavorite(data.id))}
             >
               <FaHeart />
             </button>
