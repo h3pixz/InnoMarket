@@ -1,36 +1,45 @@
-import { useState } from 'react';
 import '../styles/filters.css';
 
-const INITIAL_CHIPS = [
-  'Accessories',
-  'White, Dark',
-  '36, 36,5',
-  'Wrangler, Columbia',
-  'New',
-];
+function formatPriceChip(price) {
+  if (price.min && price.max) return `${price.min} – ${price.max} €`;
+  if (price.min) return `from ${price.min} €`;
+  return `to ${price.max} €`;
+}
 
-export default function FilterChips() {
-  const [chips, setChips] = useState(INITIAL_CHIPS);
+export default function FilterChips({
+  selectedColors,
+  onRemoveColor,
+  price,
+  onClearPrice,
+}) {
+  const hasPrice = Boolean(price.min || price.max);
 
-  const removeChip = (chip) => {
-    setChips((prev) => prev.filter((item) => item !== chip));
-  };
-
-  if (!chips.length) return null;
+  if (!selectedColors.length && !hasPrice) return null;
 
   return (
     <div className="filter-chips">
-      {chips.map((chip) => (
+      {selectedColors.map((color) => (
         <button
-          key={chip}
+          key={color}
           type="button"
           className="filter-chips__chip"
-          onClick={() => removeChip(chip)}
+          onClick={() => onRemoveColor(color)}
         >
-          <span>{chip}</span>
+          <span>{color}</span>
           <span className="filter-chips__close">&times;</span>
         </button>
       ))}
+
+      {hasPrice && (
+        <button
+          type="button"
+          className="filter-chips__chip"
+          onClick={onClearPrice}
+        >
+          <span>{formatPriceChip(price)}</span>
+          <span className="filter-chips__close">&times;</span>
+        </button>
+      )}
     </div>
   );
 }
