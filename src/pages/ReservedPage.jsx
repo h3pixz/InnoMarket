@@ -1,15 +1,23 @@
 import { useState } from 'react';
-import { useGetProductsQuery } from '../app/api';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../app/cartSlice';
 import CategoryTabs from '../components/CategoryTabs';
 import ReservedProduct from '../components/ReservedProduct';
-import { SHOPS } from '../mocks/shops';
+import { SHOPS, getShopForProduct } from '../mocks/shops';
 import '../styles/reserved.css';
 
 const STATUSES = ['Reserved', 'Purchased'];
 
 export default function ReservedPage() {
   const [status, setStatus] = useState(STATUSES[0]);
-  const { data, isLoading, isError } = useGetProductsQuery();
+  const reservedItems = useSelector(selectCartItems);
+
+  const shopsWithItems = SHOPS.map((shop) => ({
+    ...shop,
+    products: reservedItems.filter(
+      (product) => getShopForProduct(product).id === shop.id
+    ),
+  })).filter((shop) => shop.products.length > 0);
 
   return (
     <>
@@ -32,43 +40,42 @@ export default function ReservedPage() {
           ))}
         </div>
 
-        {isLoading && <p>Loading…</p>}
-        {isError && <p>Failed to load products</p>}
-        {data &&
-          SHOPS.map((shop) => (
-            <section key={shop.id} className="reserved-shop">
-              <header className="reserved-shop__header">
-                <div className="reserved-shop__field">
-                  <span className="reserved-shop__label">Shop</span>
-                  <span className="reserved-shop__value">{shop.name}</span>
-                </div>
-                <div className="reserved-shop__field">
-                  <span className="reserved-shop__label">Location</span>
-                  <span className="reserved-shop__value">{shop.location}</span>
-                </div>
-                <div className="reserved-shop__field">
-                  <span className="reserved-shop__label">Work hours</span>
-                  <span className="reserved-shop__value">{shop.workHours}</span>
-                </div>
-                <div className="reserved-shop__field">
-                  <span className="reserved-shop__label">Reserved time</span>
-                  <span className="reserved-shop__value">{shop.reservedTime}</span>
-                </div>
-              </header>
+        {!shopsWithItems.length && (
+          <p className="reserved__empty">No reserved items yet</p>
+        )}
 
-              <div className="reserved-shop__products">
-                {shop.productIndexes.map((index) =>
-                  data.products[index] ? (
-                    <ReservedProduct
-                      key={data.products[index].id}
-                      product={data.products[index]}
-                      freeShippingFrom={shop.freeShippingFrom}
-                    />
-                  ) : null
-                )}
+        {shopsWithItems.map((shop) => (
+          <section key={shop.id} className="reserved-shop">
+            <header className="reserved-shop__header">
+              <div className="reserved-shop__field">
+                <span className="reserved-shop__label">Shop</span>
+                <span className="reserved-shop__value">{shop.name}</span>
               </div>
-            </section>
-          ))}
+              <div className="reserved-shop__field">
+                <span className="reserved-shop__label">Location</span>
+                <span className="reserved-shop__value">{shop.location}</span>
+              </div>
+              <div className="reserved-shop__field">
+                <span className="reserved-shop__label">Work hours</span>
+                <span className="reserved-shop__value">{shop.workHours}</span>
+              </div>
+              <div className="reserved-shop__field">
+                <span className="reserved-shop__label">Reserved time</span>
+                <span className="reserved-shop__value">{shop.reservedTime}</span>
+              </div>
+            </header>
+
+            <div className="reserved-shop__products">
+              {shop.products.map((product) => (
+                <ReservedProduct
+                  key={product.id}
+                  product={product}
+                  freeShippingFrom={shop.freeShippingFrom}
+                />
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </>
   );

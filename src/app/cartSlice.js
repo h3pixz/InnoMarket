@@ -27,6 +27,7 @@ const cartSlice = createSlice({
 
 export const { addToCart, removeFromCart, toggleFavorite } = cartSlice.actions;
 
+export const selectCartItems = (state) => state.cart.items;
 export const selectCartCount = (state) => state.cart.items.length;
 export const selectFavoritesCount = (state) => state.cart.favoriteIds.length;
 export const selectIsInCart = (id) => (state) =>

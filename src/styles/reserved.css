@@ -11,6 +11,13 @@
   gap: 32px;
 }
 
+.reserved__empty {
+  margin: 0;
+  padding: 48px 0;
+  text-align: center;
+  color: #6b7280;
+}
+
 .reserved__status {
   padding: 8px 0;
   font: inherit;
