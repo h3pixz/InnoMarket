@@ -15,11 +15,11 @@ export default function ProductPage() {
   if (isLoading) return <p>Loading…</p>;
   if (isError) return <p>Failed to load product</p>;
 
-  const { size, color, deliveryTime, tags } = getMockDetails(data);
+  const { color, deliveryTime, tags } = getMockDetails(data);
   const oldPrice = data.discountPercentage
     ? data.price / (1 - data.discountPercentage / 100)
     : null;
-  const title = [data.title, data.brand, size].filter(Boolean).join(' - ');
+  const title = [data.title, data.brand].filter(Boolean).join(' - ');
   const freeShippingFrom = 34 + (data.id % 3) * 8;
 
   return (
