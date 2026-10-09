@@ -39,10 +39,10 @@ export default function Header() {
         </nav>
 
         <div className="header__actions">
-          <button type="button" className="header__action" aria-label="Favorites">
+          <Link to="/likes" className="header__action" aria-label="Favorites">
             <FaHeart />
             <span className="header__number">{favoritesCount}</span>
-          </button>
+          </Link>
 
           <Link to="/reserved" className="header__action" aria-label="Cart">
             <FaShoppingCart />

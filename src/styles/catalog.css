@@ -1,3 +1,14 @@
+.catalog {
+  padding: 24px;
+}
+
+.catalog__empty {
+  margin: 0;
+  padding: 48px 0;
+  text-align: center;
+  color: #6b7280;
+}
+
 .catalog-layout {
   display: flex;
   gap: 32px;
