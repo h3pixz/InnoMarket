@@ -1,14 +1,27 @@
+import { useDispatch } from 'react-redux';
 import { IoIosArrowDown } from 'react-icons/io';
+import { FaTimes } from 'react-icons/fa';
+import { removeFromCart } from '../app/cartSlice';
 import { getMockDetails } from '../mocks/productDetails';
 import { formatPrice } from '../utils/format';
 import '../styles/reserved.css';
 
 export default function ReservedProduct({ product, freeShippingFrom }) {
+  const dispatch = useDispatch();
   const { size, color, deliveryTime } = getMockDetails(product);
   const title = [product.title, product.brand, size].filter(Boolean).join(' - ');
 
   return (
     <article className="reserved-product">
+      <button
+        type="button"
+        className="reserved-product__remove"
+        aria-label="Remove from reserved"
+        onClick={() => dispatch(removeFromCart(product.id))}
+      >
+        <FaTimes />
+      </button>
+
       <img
         className="reserved-product__image"
         src={product.thumbnail}

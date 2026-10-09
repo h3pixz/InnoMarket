@@ -76,8 +76,26 @@
 }
 
 .reserved-product {
+  position: relative;
   display: flex;
   gap: 20px;
+}
+
+.reserved-product__remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1;
+  color: #6b7280;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.reserved-product__remove:hover {
+  color: #e55a63;
 }
 
 .reserved-product__image {
@@ -94,6 +112,7 @@
   flex-direction: column;
   gap: 10px;
   min-width: 0;
+  padding-right: 28px;
 }
 
 .reserved-product__title {
