@@ -1,4 +1,5 @@
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { IoIosSearch } from "react-icons/io";
 import { FaUser, FaShoppingCart, FaHeart } from "react-icons/fa";
@@ -8,6 +9,22 @@ import logo from "../assets/logo.png";
 export default function Header() {
   const favoritesCount = useSelector(selectFavoritesCount);
   const cartCount = useSelector(selectCartCount);
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
+
+  useEffect(() => {
+    setQuery(searchParams.get("q") ?? "");
+  }, [searchParams]);
+
+  const handleSearch = (event) => {
+    const value = event.target.value;
+    setQuery(value);
+    const trimmed = value.trim();
+    navigate(trimmed ? `/?q=${encodeURIComponent(trimmed)}` : "/", {
+      replace: true,
+    });
+  };
 
   return (
     <header className="header">
@@ -19,10 +36,20 @@ export default function Header() {
             <p className="header__title">Market</p>
           </div>
         </Link>
-        <div className="header__searchbox">
+        <form
+          className="header__searchbox"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <IoIosSearch className="header__icon" />
-          <input className="header__search" type="search" aria-label="Search" />
-        </div>
+          <input
+            className="header__search"
+            type="search"
+            aria-label="Search"
+            placeholder="Search"
+            value={query}
+            onChange={handleSearch}
+          />
+        </form>
       </div>
 
       <div className="header__navrow">
