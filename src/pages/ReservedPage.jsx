@@ -19,6 +19,9 @@ export default function ReservedPage() {
     ),
   })).filter((shop) => shop.products.length > 0);
 
+  const isReserved = status === STATUSES[0];
+  const isEmpty = !isReserved || !shopsWithItems.length;
+
   return (
     <>
       <CategoryTabs />
@@ -40,42 +43,45 @@ export default function ReservedPage() {
           ))}
         </div>
 
-        {!shopsWithItems.length && (
-          <p className="reserved__empty">No reserved items yet</p>
+        {isEmpty && (
+          <p className="reserved__empty">
+            {isReserved ? 'No reserved items yet' : 'No items yet'}
+          </p>
         )}
 
-        {shopsWithItems.map((shop) => (
-          <section key={shop.id} className="reserved-shop">
-            <header className="reserved-shop__header">
-              <div className="reserved-shop__field">
-                <span className="reserved-shop__label">Shop</span>
-                <span className="reserved-shop__value">{shop.name}</span>
-              </div>
-              <div className="reserved-shop__field">
-                <span className="reserved-shop__label">Location</span>
-                <span className="reserved-shop__value">{shop.location}</span>
-              </div>
-              <div className="reserved-shop__field">
-                <span className="reserved-shop__label">Work hours</span>
-                <span className="reserved-shop__value">{shop.workHours}</span>
-              </div>
-              <div className="reserved-shop__field">
-                <span className="reserved-shop__label">Reserved time</span>
-                <span className="reserved-shop__value">{shop.reservedTime}</span>
-              </div>
-            </header>
+        {isReserved &&
+          shopsWithItems.map((shop) => (
+            <section key={shop.id} className="reserved-shop">
+              <header className="reserved-shop__header">
+                <div className="reserved-shop__field">
+                  <span className="reserved-shop__label">Shop</span>
+                  <span className="reserved-shop__value">{shop.name}</span>
+                </div>
+                <div className="reserved-shop__field">
+                  <span className="reserved-shop__label">Location</span>
+                  <span className="reserved-shop__value">{shop.location}</span>
+                </div>
+                <div className="reserved-shop__field">
+                  <span className="reserved-shop__label">Work hours</span>
+                  <span className="reserved-shop__value">{shop.workHours}</span>
+                </div>
+                <div className="reserved-shop__field">
+                  <span className="reserved-shop__label">Reserved time</span>
+                  <span className="reserved-shop__value">{shop.reservedTime}</span>
+                </div>
+              </header>
 
-            <div className="reserved-shop__products">
-              {shop.products.map((product) => (
-                <ReservedProduct
-                  key={product.id}
-                  product={product}
-                  freeShippingFrom={shop.freeShippingFrom}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
+              <div className="reserved-shop__products">
+                {shop.products.map((product) => (
+                  <ReservedProduct
+                    key={product.id}
+                    product={product}
+                    freeShippingFrom={shop.freeShippingFrom}
+                  />
+                ))}
+              </div>
+            </section>
+          ))}
       </div>
     </>
   );
