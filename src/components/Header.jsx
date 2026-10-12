@@ -76,9 +76,9 @@ export default function Header() {
             <span className="header__number">{cartCount}</span>
           </Link>
 
-          <button type="button" className="header__profile" aria-label="Profile">
+          <Link to="/account" className="header__profile" aria-label="Profile">
             <FaUser />
-          </button>
+          </Link>
         </div>
       </div>
     </header>

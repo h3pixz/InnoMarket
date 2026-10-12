@@ -113,10 +113,12 @@
 }
 
 .header__profile {
+  display: flex;
   padding: 0;
   font: inherit;
+  color: #ffffff;
+  text-decoration: none;
   background: none;
   border: 0;
   cursor: pointer;
-  color: #ffffff;
 }

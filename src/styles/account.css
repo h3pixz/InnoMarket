@@ -1,0 +1,102 @@
+.account {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.account__card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.account__avatar {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  background-color: #f4f4f4;
+  border-radius: 50%;
+}
+
+.account__head {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.account__name {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 900;
+  color: #333333;
+}
+
+.account__username {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.account__contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account__row {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+  font-size: 15px;
+  color: #333333;
+}
+
+.account__icon {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: #e55a63;
+}
+
+.account__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.account__link {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+  text-decoration: none;
+  background-color: #f4f4f4;
+  border-radius: 18px;
+}
+
+.account__link:hover {
+  background-color: #e9eaec;
+}
+
+.account__logout {
+  align-self: flex-start;
+  padding: 12px 28px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #e55a63;
+  border: 0;
+  border-radius: 26px;
+  cursor: pointer;
+}
+
+.account__logout:hover {
+  background-color: #d44d56;
+}
