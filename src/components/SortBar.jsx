@@ -1,11 +1,11 @@
-import { useState } from 'react';
 import '../styles/filters.css';
 
-const OPTIONS = ['Ascending price', 'Descending price'];
+export const SORT_ASC = 'Ascending price';
+export const SORT_DESC = 'Descending price';
 
-export default function SortBar() {
-  const [active, setActive] = useState(OPTIONS[0]);
+const OPTIONS = [SORT_ASC, SORT_DESC];
 
+export default function SortBar({ value, onChange }) {
   return (
     <div className="sort-bar">
       <span className="sort-bar__label">Sort by:</span>
@@ -14,11 +14,11 @@ export default function SortBar() {
           key={option}
           type="button"
           className={
-            option === active
+            option === value
               ? 'sort-bar__option sort-bar__option--active'
               : 'sort-bar__option'
           }
-          onClick={() => setActive(option)}
+          onClick={() => onChange(option)}
         >
           {option}
         </button>

@@ -7,7 +7,7 @@ import CategoryTabs from '../components/CategoryTabs';
 import FilterBar from '../components/FilterBar';
 import FilterChips from '../components/FilterChips';
 import ProductCard from '../components/ProductCard';
-import SortBar from '../components/SortBar';
+import SortBar, { SORT_ASC } from '../components/SortBar';
 import { getMockDetails } from '../mocks/productDetails';
 import '../styles/catalog.css';
 
@@ -21,6 +21,7 @@ export default function HomePage() {
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [saleActive, setSaleActive] = useState(false);
+  const [sort, setSort] = useState(null);
   const [price, setPrice] = useState({ min: '', max: '' });
   const query = (searchParams.get('q') ?? '').trim().toLowerCase();
 
@@ -42,6 +43,8 @@ export default function HomePage() {
   };
 
   const toggleSale = () => setSaleActive((prev) => !prev);
+
+  const toggleSort = (option) => setSort((prev) => (prev === option ? null : option));
 
   const minPrice = price.min === '' ? -Infinity : Number(price.min);
   const maxPrice = price.max === '' ? Infinity : Number(price.max);
@@ -69,6 +72,12 @@ export default function HomePage() {
       saleMatches
     );
   });
+
+  const sorted = sort
+    ? [...filtered].sort((a, b) =>
+        sort === SORT_ASC ? a.price - b.price : b.price - a.price
+      )
+    : filtered;
 
   return (
     <>
@@ -104,15 +113,15 @@ export default function HomePage() {
             price={price}
             onClearPrice={() => setPrice({ min: '', max: '' })}
           />
-          <SortBar />
+          <SortBar value={sort} onChange={toggleSort} />
           {isLoading && <p>Loading…</p>}
           {isError && <p>Failed to load products</p>}
           {data && !filtered.length && (
             <p className="catalog__empty">No items found</p>
           )}
-          {data && filtered.length > 0 && (
+          {data && sorted.length > 0 && (
             <div className="catalog__grid">
-              {filtered.map((product) => (
+              {sorted.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
             </div>
