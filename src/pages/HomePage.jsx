@@ -11,21 +11,37 @@ import SortBar from '../components/SortBar';
 import { getMockDetails } from '../mocks/productDetails';
 import '../styles/catalog.css';
 
+const SALE_MIN_DISCOUNT = 10;
+const NO_BRAND = 'No brand';
+
 export default function HomePage() {
   const { data, isLoading, isError } = useGetProductsQuery();
   const [searchParams] = useSearchParams();
   const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedBrands, setSelectedBrands] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [saleActive, setSaleActive] = useState(false);
   const [price, setPrice] = useState({ min: '', max: '' });
   const query = (searchParams.get('q') ?? '').trim().toLowerCase();
 
   const products = data?.products ?? [];
   const colors = [...new Set(products.map((item) => getMockDetails(item).color))].sort();
+  const brands = [...new Set(products.map((item) => item.brand ?? NO_BRAND))].sort();
+  const categories = [...new Set(products.map((item) => item.category))].sort();
 
   const toggleColor = (color) => {
     setSelectedColors((prev) =>
       prev.includes(color) ? prev.filter((item) => item !== color) : [...prev, color]
     );
   };
+
+  const toggleBrand = (brand) => {
+    setSelectedBrands((prev) =>
+      prev.includes(brand) ? prev.filter((item) => item !== brand) : [...prev, brand]
+    );
+  };
+
+  const toggleSale = () => setSaleActive((prev) => !prev);
 
   const minPrice = price.min === '' ? -Infinity : Number(price.min);
   const maxPrice = price.max === '' ? Infinity : Number(price.max);
@@ -38,7 +54,20 @@ export default function HomePage() {
       !query ||
       product.title.toLowerCase().includes(query) ||
       (product.brand ?? '').toLowerCase().includes(query);
-    return colorMatches && priceMatches && titleMatches;
+    const brandMatches =
+      !selectedBrands.length ||
+      selectedBrands.includes(product.brand ?? NO_BRAND);
+    const categoryMatches =
+      !selectedCategory || product.category === selectedCategory;
+    const saleMatches = !saleActive || product.discountPercentage >= SALE_MIN_DISCOUNT;
+    return (
+      colorMatches &&
+      priceMatches &&
+      titleMatches &&
+      brandMatches &&
+      categoryMatches &&
+      saleMatches
+    );
   });
 
   return (
@@ -54,10 +83,24 @@ export default function HomePage() {
             onToggleColor={toggleColor}
             price={price}
             onPriceChange={setPrice}
+            brands={brands}
+            selectedBrands={selectedBrands}
+            onToggleBrand={toggleBrand}
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+            saleActive={saleActive}
+            onToggleSale={toggleSale}
           />
           <FilterChips
             selectedColors={selectedColors}
             onRemoveColor={toggleColor}
+            selectedBrands={selectedBrands}
+            onRemoveBrand={toggleBrand}
+            selectedCategory={selectedCategory}
+            onClearCategory={() => setSelectedCategory('')}
+            saleActive={saleActive}
+            onClearSale={toggleSale}
             price={price}
             onClearPrice={() => setPrice({ min: '', max: '' })}
           />
