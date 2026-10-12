@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import LikesPage from "./pages/LikesPage";
 import ProductPage from "./pages/ProductPage";
 import ReservedPage from "./pages/ReservedPage";
+import ShopsPage from "./pages/ShopsPage";
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: "product/:id", Component: ProductPage },
       { path: "reserved", Component: ReservedPage },
       { path: "likes", Component: LikesPage },
+      { path: "shops", Component: ShopsPage },
     ],
   },
 ]);
