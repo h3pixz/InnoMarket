@@ -16,3 +16,22 @@ export function saveCartState(state) {
     return;
   }
 }
+
+const USER_STORAGE_KEY = 'innomarket.user';
+
+export function loadUserState() {
+  try {
+    const raw = localStorage.getItem(USER_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveUserState(state) {
+  try {
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    return;
+  }
+}

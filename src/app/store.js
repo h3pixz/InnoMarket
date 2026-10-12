@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { api } from './api';
 import cartReducer from './cartSlice';
-import { saveCartState } from './storage';
+import userReducer from './userSlice';
+import { saveCartState, saveUserState } from './storage';
 
 export const store = configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     cart: cartReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(api.middleware),
@@ -14,4 +16,5 @@ export const store = configureStore({
 
 store.subscribe(() => {
   saveCartState(store.getState().cart);
+  saveUserState(store.getState().user);
 });

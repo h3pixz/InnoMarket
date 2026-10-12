@@ -3,12 +3,14 @@ import Layout from "./components/Layout";
 import AboutPage from "./pages/AboutPage";
 import HomePage from "./pages/HomePage";
 import LikesPage from "./pages/LikesPage";
+import LoginPage from "./pages/LoginPage";
 import MerchantPage from "./pages/MerchantPage";
 import ProductPage from "./pages/ProductPage";
 import ReservedPage from "./pages/ReservedPage";
 import ShopsPage from "./pages/ShopsPage";
 
 export const router = createBrowserRouter([
+  { path: "/login", Component: LoginPage },
   {
     path: "/",
     Component: Layout,

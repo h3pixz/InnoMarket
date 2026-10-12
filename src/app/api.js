@@ -13,7 +13,19 @@ export const api = createApi({
     getUsers: builder.query({
       query: () => '/users',
     }),
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: '/auth/login',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetProductByIdQuery, useGetUsersQuery } = api;
+export const {
+  useGetProductsQuery,
+  useGetProductByIdQuery,
+  useGetUsersQuery,
+  useLoginMutation,
+} = api;
