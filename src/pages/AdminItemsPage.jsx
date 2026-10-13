@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoIosSearch } from 'react-icons/io';
+import { FaTrashAlt } from 'react-icons/fa';
 import { useGetProductsQuery } from '../app/api';
-import { addAdminItem, selectAddedItems } from '../app/adminItemsSlice';
+import {
+  addAdminItem,
+  removeAdminItem,
+  removeAdminItems,
+  selectAddedItems,
+} from '../app/adminItemsSlice';
 import { getMockAdminRow } from '../mocks/adminItems';
 import AddItemModal from '../components/AddItemModal';
 import '../styles/admin.css';
@@ -26,6 +32,7 @@ export default function AdminItemsPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const products = [...addedItems, ...(data?.products ?? [])];
+  const addedIds = new Set(addedItems.map((item) => item.id));
   const rows = products.map((product) => ({
     product,
     category: formatCategory(product.category),
@@ -75,6 +82,18 @@ export default function AdminItemsPage() {
     setIsModalOpen(false);
   };
 
+  const selectedAddedIds = selectedIds.filter((id) => addedIds.has(id));
+
+  const handleDeleteSelected = () => {
+    dispatch(removeAdminItems(selectedAddedIds));
+    setSelectedIds((prev) => prev.filter((id) => !addedIds.has(id)));
+  };
+
+  const handleDeleteRow = (id) => {
+    dispatch(removeAdminItem(id));
+    setSelectedIds((prev) => prev.filter((item) => item !== id));
+  };
+
   return (
     <section className="admin-card">
       <div className="admin-card__header">
@@ -96,6 +115,14 @@ export default function AdminItemsPage() {
             onClick={() => setIsModalOpen(true)}
           >
             Add an Item
+          </button>
+          <button
+            type="button"
+            className="admin-delete"
+            onClick={handleDeleteSelected}
+            disabled={!selectedAddedIds.length}
+          >
+            Delete
           </button>
         </div>
       </div>
@@ -121,6 +148,7 @@ export default function AdminItemsPage() {
               <th>Subcategory</th>
               <th>Storage</th>
               <th>Status</th>
+              <th className="admin-table__actions" aria-label="Actions" />
             </tr>
           </thead>
           <tbody>
@@ -154,6 +182,17 @@ export default function AdminItemsPage() {
                   <span className={`admin-status admin-status--${row.statusKey}`}>
                     {row.status}
                   </span>
+                </td>
+                <td className="admin-table__actions">
+                  <button
+                    type="button"
+                    className="admin-table__delete"
+                    aria-label={`Delete ${row.product.title}`}
+                    onClick={() => handleDeleteRow(row.product.id)}
+                    disabled={!addedIds.has(row.product.id)}
+                  >
+                    <FaTrashAlt />
+                  </button>
                 </td>
               </tr>
             ))}
