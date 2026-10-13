@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IoIosArrowDown } from 'react-icons/io';
 import { FaHeart, FaShoppingCart } from 'react-icons/fa';
 import { useGetProductByIdQuery } from '../app/api';
+import { selectAddedItems } from '../app/adminItemsSlice';
 import {
   addToCart,
   removeFromCart,
@@ -19,7 +20,12 @@ import '../styles/product-detail.css';
 export default function ProductPage() {
   const { id } = useParams();
   const dispatch = useDispatch();
-  const { data, isLoading, isError } = useGetProductByIdQuery(id);
+  const addedItems = useSelector(selectAddedItems);
+  const localProduct = addedItems.find((item) => item.id === Number(id));
+  const { data: remoteProduct, isLoading, isError } = useGetProductByIdQuery(id, {
+    skip: Boolean(localProduct),
+  });
+  const data = localProduct ?? remoteProduct;
   const isInCart = useSelector(selectIsInCart(Number(id)));
   const isFavorite = useSelector(selectIsFavorite(Number(id)));
 
