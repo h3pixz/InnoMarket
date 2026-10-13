@@ -110,14 +110,14 @@
 }
 
 .admin-main {
-  padding: 40px;
+  padding: 48px;
 }
 
 .admin-card {
   padding: 40px;
   background-color: #ffffff;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.15);
 }
 
 .admin-card__title {
@@ -126,4 +126,167 @@
   font-weight: 500;
   color: #333333;
   opacity: 70%;
+}
+
+.admin-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.admin-card__tools {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 360px;
+  height: 32px;
+}
+
+.admin-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-search__icon {
+  position: absolute;
+  left: 14px;
+  font-size: 18px;
+  color: #9a9a9a;
+  pointer-events: none;
+}
+
+.admin-search__input {
+  width: 100%;
+  height: 32px;
+  padding: 0 16px 0 40px;
+  font-size: 14px;
+  color: #333333;
+  background-color: #ececec;
+  border: 0;
+  border-radius: 20px;
+  outline: none;
+}
+
+.admin-add {
+  height: 32px;
+  padding: 0 20px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: #2f80ed;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.admin-add:hover {
+  background-color: #2a72d4;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.admin-table th {
+  padding: 16px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #333333;
+  opacity: 50%;
+  text-align: left;
+  border-bottom: 1px solid #ededed;
+}
+
+.admin-table th.admin-table__check {
+  opacity: 1;
+}
+
+.admin-table td {
+  padding: 14px 12px;
+  color: #333333;
+  vertical-align: middle;
+  border-top: 1px solid #ededed;
+}
+
+.admin-table__check {
+  width: 44px;
+}
+
+.admin-table__check input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2f80ed;
+  cursor: pointer;
+}
+
+.admin-table__name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.admin-table__thumb {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+}
+
+.admin-table__title {
+  max-width: 340px;
+  font-size: 14px;
+  color: #333333;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.admin-table__storage {
+  max-width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.admin-status {
+  font-weight: 600;
+}
+
+.admin-status--sale {
+  color: #2e9e5b;
+}
+
+.admin-status--progress {
+  color: #2f6fed;
+}
+
+.admin-status--locked {
+  color: #4a4a4a;
+}
+
+.admin-status--reserved {
+  color: #e8a13a;
+}
+
+.admin-status--sold {
+  color: #e0524f;
+}
+
+.admin-status--closed {
+  color: #b0b0b0;
+}
+
+.admin-note {
+  margin: 24px 0 0;
+  color: #8a8a8a;
 }
