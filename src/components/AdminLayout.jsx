@@ -5,11 +5,11 @@ import logo from '../assets/logo.png';
 import '../styles/admin.css';
 
 const NAV = [
-  'Maintain Items',
-  'Master Data',
-  'User Management',
-  'Reporting',
-  'Settlement BC',
+  { label: 'Maintain Items' },
+  { label: 'Master Data' },
+  { label: 'User Management', to: '/admin/users/new' },
+  { label: 'Reporting' },
+  { label: 'Settlement BC' },
 ];
 
 export default function AdminLayout() {
@@ -27,11 +27,17 @@ export default function AdminLayout() {
           </Link>
 
           <nav className="admin-nav">
-            {NAV.map((label) => (
-              <span key={label} className="admin-nav__link">
-                {label}
-              </span>
-            ))}
+            {NAV.map(({ label, to }) =>
+              to ? (
+                <Link key={label} to={to} className="admin-nav__link">
+                  {label}
+                </Link>
+              ) : (
+                <span key={label} className="admin-nav__link">
+                  {label}
+                </span>
+              )
+            )}
           </nav>
         </div>
 
