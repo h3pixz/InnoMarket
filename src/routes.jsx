@@ -3,6 +3,7 @@ import AdminLayout from "./components/AdminLayout";
 import Layout from "./components/Layout";
 import AboutPage from "./pages/AboutPage";
 import AccountPage from "./pages/AccountPage";
+import AddUserPage from "./pages/AddUserPage";
 import AdminItemsPage from "./pages/AdminItemsPage";
 import HomePage from "./pages/HomePage";
 import LikesPage from "./pages/LikesPage";
@@ -17,7 +18,10 @@ export const router = createBrowserRouter([
   {
     path: "/admin",
     Component: AdminLayout,
-    children: [{ index: true, Component: AdminItemsPage }],
+    children: [
+      { index: true, Component: AdminItemsPage },
+      { path: "users/new", Component: AddUserPage },
+    ],
   },
   {
     path: "/",

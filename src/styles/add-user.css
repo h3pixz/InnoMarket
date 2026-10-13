@@ -1,0 +1,13 @@
+.add-user {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.add-user__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  opacity: 70%;
+  color: #333333;
+}

@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 15px;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .breadcrumbs__crumb {
@@ -17,4 +18,12 @@
 
 .breadcrumbs__separator {
   color: #6b7280;
+}
+
+.breadcrumbs--admin .breadcrumbs__crumb,
+.breadcrumbs--admin .breadcrumbs__crumb--current,
+.breadcrumbs--admin .breadcrumbs__separator {
+  font-weight: 700;
+  color: #333333;
+  cursor: default;
 }

@@ -2,9 +2,13 @@ import '../styles/breadcrumbs.css';
 
 const DEFAULT_CRUMBS = ['Home', 'Woman', 'Accessories'];
 
-export default function Breadcrumbs({ items = DEFAULT_CRUMBS }) {
+export default function Breadcrumbs({ items = DEFAULT_CRUMBS, variant }) {
+  const className = variant
+    ? `breadcrumbs breadcrumbs--${variant}`
+    : 'breadcrumbs';
+
   return (
-    <nav className="breadcrumbs" aria-label="Breadcrumb">
+    <nav className={className} aria-label="Breadcrumb">
       {items.map((crumb, index) => {
         const isLast = index === items.length - 1;
         return (
