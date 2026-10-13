@@ -1,0 +1,129 @@
+.admin {
+  min-height: 100vh;
+  background-color: #f2f2f2;
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 18px 40px;
+  color: #ffffff;
+  background-color: #4a4a4a;
+}
+
+.admin-header__left {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+.admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.admin-brand__logo {
+  height: 40px;
+  border-radius: 50%;
+}
+
+.admin-brand__titles {
+  display: flex;
+  flex-direction: column;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.admin-brand__title {
+  margin: 0;
+  font-size: 14px;
+  color: #ffffff;
+  line-height: 1.1;
+}
+
+.admin-brand__sub {
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.admin-nav {
+  display: flex;
+  gap: 16px;
+}
+
+.admin-nav__link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-nav__link:hover,
+.admin-nav__link--active {
+  color: #ffffff;
+}
+
+.admin-header__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-checkout {
+  font-size: 14px;
+  font-weight: 500;
+  color: #ffffff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.admin-profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0;
+  font: inherit;
+  font-size: 18px;
+  color: #ffffff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+.admin-profile__icon {
+  width: 20px;
+  height: 20px;
+}
+
+.admin-profile__chevron {
+  font-size: 14px;
+}
+
+.admin-main {
+  padding: 40px;
+}
+
+.admin-card {
+  padding: 40px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.admin-card__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 500;
+  color: #333333;
+  opacity: 70%;
+}
