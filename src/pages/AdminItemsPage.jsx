@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IoIosSearch } from 'react-icons/io';
 import { useGetProductsQuery } from '../app/api';
 import { getMockAdminRow } from '../mocks/adminItems';
+import AddItemModal from '../components/AddItemModal';
 import '../styles/admin.css';
 
 function formatCategory(slug) {
@@ -15,6 +16,7 @@ export default function AdminItemsPage() {
   const { data, isLoading, isError } = useGetProductsQuery();
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const products = data?.products ?? [];
   const rows = products.map((product) => ({
@@ -62,7 +64,11 @@ export default function AdminItemsPage() {
               onChange={(event) => setQuery(event.target.value)}
             />
           </div>
-          <button type="button" className="admin-add">
+          <button
+            type="button"
+            className="admin-add"
+            onClick={() => setIsModalOpen(true)}
+          >
             Add an Item
           </button>
         </div>
@@ -130,6 +136,12 @@ export default function AdminItemsPage() {
       )}
 
       {data && !filtered.length && <p className="admin-note">No items found</p>}
+
+      <AddItemModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }
