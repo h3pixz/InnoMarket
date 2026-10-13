@@ -1,15 +1,15 @@
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { FaUser } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
 import logo from '../assets/logo.png';
 import '../styles/admin.css';
 
 const NAV = [
-  { label: 'Maintain Items', to: '/admin' },
-  { label: 'Master Data', to: '/admin/master-data' },
-  { label: 'User Management', to: '/admin/user-management' },
-  { label: 'Reporting', to: '/admin/reporting' },
-  { label: 'Settlement BC', to: '/admin/settlement-bc' },
+  'Maintain Items',
+  'Master Data',
+  'User Management',
+  'Reporting',
+  'Settlement BC',
 ];
 
 export default function AdminLayout() {
@@ -27,19 +27,10 @@ export default function AdminLayout() {
           </Link>
 
           <nav className="admin-nav">
-            {NAV.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                end
-                className={({ isActive }) =>
-                  isActive
-                    ? 'admin-nav__link admin-nav__link--active'
-                    : 'admin-nav__link'
-                }
-              >
-                {item.label}
-              </NavLink>
+            {NAV.map((label) => (
+              <span key={label} className="admin-nav__link">
+                {label}
+              </span>
             ))}
           </nav>
         </div>
