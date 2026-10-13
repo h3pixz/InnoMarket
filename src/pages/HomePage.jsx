@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 import { useGetProductsQuery } from '../app/api';
+import { selectAddedItems } from '../app/adminItemsSlice';
 import Breadcrumbs from '../components/Breadcrumbs';
 import CategorySidebar from '../components/CategorySidebar';
 import CategoryTabs from '../components/CategoryTabs';
@@ -16,6 +18,7 @@ const NO_BRAND = 'No brand';
 
 export default function HomePage() {
   const { data, isLoading, isError } = useGetProductsQuery();
+  const addedItems = useSelector(selectAddedItems);
   const [searchParams] = useSearchParams();
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -25,7 +28,7 @@ export default function HomePage() {
   const [price, setPrice] = useState({ min: '', max: '' });
   const query = (searchParams.get('q') ?? '').trim().toLowerCase();
 
-  const products = data?.products ?? [];
+  const products = [...addedItems, ...(data?.products ?? [])];
   const colors = [...new Set(products.map((item) => getMockDetails(item).color))].sort();
   const brands = [...new Set(products.map((item) => item.brand ?? NO_BRAND))].sort();
   const categories = [...new Set(products.map((item) => item.category))].sort();
@@ -116,10 +119,10 @@ export default function HomePage() {
           <SortBar value={sort} onChange={toggleSort} />
           {isLoading && <p>Loading…</p>}
           {isError && <p>Failed to load products</p>}
-          {data && !filtered.length && (
+          {products.length > 0 && !filtered.length && (
             <p className="catalog__empty">No items found</p>
           )}
-          {data && sorted.length > 0 && (
+          {sorted.length > 0 && (
             <div className="catalog__grid">
               {sorted.map((product) => (
                 <ProductCard key={product.id} product={product} />

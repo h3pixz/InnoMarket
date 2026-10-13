@@ -35,3 +35,22 @@ export function saveUserState(state) {
     return;
   }
 }
+
+const ADMIN_ITEMS_STORAGE_KEY = 'innomarket.adminItems';
+
+export function loadAdminItems() {
+  try {
+    const raw = localStorage.getItem(ADMIN_ITEMS_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveAdminItems(state) {
+  try {
+    localStorage.setItem(ADMIN_ITEMS_STORAGE_KEY, JSON.stringify(state));
+  } catch {
+    return;
+  }
+}

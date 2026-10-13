@@ -1,9 +1,14 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoIosSearch } from 'react-icons/io';
 import { useGetProductsQuery } from '../app/api';
+import { addAdminItem, selectAddedItems } from '../app/adminItemsSlice';
 import { getMockAdminRow } from '../mocks/adminItems';
 import AddItemModal from '../components/AddItemModal';
 import '../styles/admin.css';
+
+const FALLBACK_IMAGE =
+  'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><rect width="300" height="300" fill="%23ececec"/></svg>';
 
 function formatCategory(slug) {
   return slug
@@ -13,12 +18,14 @@ function formatCategory(slug) {
 }
 
 export default function AdminItemsPage() {
+  const dispatch = useDispatch();
   const { data, isLoading, isError } = useGetProductsQuery();
+  const addedItems = useSelector(selectAddedItems);
   const [query, setQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const products = data?.products ?? [];
+  const products = [...addedItems, ...(data?.products ?? [])];
   const rows = products.map((product) => ({
     product,
     category: formatCategory(product.category),
@@ -49,6 +56,25 @@ export default function AdminItemsPage() {
     );
   };
 
+  const handleAddItem = (form) => {
+    const image = form.thumbnail.trim() || FALLBACK_IMAGE;
+    const brand = form.brand.trim();
+    dispatch(
+      addAdminItem({
+        id: Date.now(),
+        title: form.title.trim(),
+        price: Number(form.price),
+        category: form.category.trim(),
+        thumbnail: image,
+        images: [image],
+        description: form.description.trim(),
+        discountPercentage: 0,
+        ...(brand ? { brand } : {}),
+      })
+    );
+    setIsModalOpen(false);
+  };
+
   return (
     <section className="admin-card">
       <div className="admin-card__header">
@@ -77,7 +103,7 @@ export default function AdminItemsPage() {
       {isLoading && <p className="admin-note">Loading…</p>}
       {isError && <p className="admin-note">Failed to load items</p>}
 
-      {data && (
+      {products.length > 0 && (
         <table className="admin-table">
           <thead>
             <tr>
@@ -135,12 +161,14 @@ export default function AdminItemsPage() {
         </table>
       )}
 
-      {data && !filtered.length && <p className="admin-note">No items found</p>}
+      {products.length > 0 && !filtered.length && (
+        <p className="admin-note">No items found</p>
+      )}
 
       <AddItemModal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSubmit={() => setIsModalOpen(false)}
+        onSubmit={handleAddItem}
       />
     </section>
   );
