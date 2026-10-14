@@ -141,3 +141,19 @@
 .add-user__radio input:checked {
   border: 6px solid #2f80ed;
 }
+
+@media (max-width: 768px) {
+  .add-user__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .add-user__row {
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .add-user__field--narrow {
+    max-width: 100%;
+  }
+}

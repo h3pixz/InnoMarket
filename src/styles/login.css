@@ -87,3 +87,13 @@
   color: #6b7280;
   text-align: center;
 }
+
+@media (max-width: 480px) {
+  .login {
+    padding: 24px 16px;
+  }
+
+  .login__card {
+    padding: 24px;
+  }
+}

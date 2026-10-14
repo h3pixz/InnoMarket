@@ -45,3 +45,19 @@
 .sidebar__chevron--open {
   transform: rotate(180deg);
 }
+
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+  }
+
+  .sidebar__title {
+    margin-bottom: 24px;
+  }
+}

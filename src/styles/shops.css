@@ -90,3 +90,13 @@
   margin-top: 3px;
   color: #e55a63;
 }
+
+@media (max-width: 768px) {
+  .shops {
+    padding: 16px;
+  }
+
+  .shops__title {
+    font-size: 28px;
+  }
+}

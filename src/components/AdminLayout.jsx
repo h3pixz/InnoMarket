@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { FaUser } from 'react-icons/fa';
+import { FaUser, FaBars, FaTimes } from 'react-icons/fa';
 import { IoIosArrowDown } from 'react-icons/io';
 import logo from '../assets/logo.png';
 import '../styles/admin.css';
@@ -13,6 +14,8 @@ const NAV = [
 ];
 
 export default function AdminLayout() {
+  const [navOpen, setNavOpen] = useState(false);
+
   return (
     <div className="admin">
       <header className="admin-header">
@@ -26,10 +29,29 @@ export default function AdminLayout() {
             </div>
           </Link>
 
-          <nav className="admin-nav">
+          <button
+            type="button"
+            className="admin-burger"
+            aria-label="Toggle menu"
+            aria-expanded={navOpen}
+            aria-controls="admin-nav"
+            onClick={() => setNavOpen((prev) => !prev)}
+          >
+            {navOpen ? <FaTimes /> : <FaBars />}
+          </button>
+
+          <nav
+            id="admin-nav"
+            className={`admin-nav${navOpen ? ' admin-nav--open' : ''}`}
+          >
             {NAV.map(({ label, to }) =>
               to ? (
-                <Link key={label} to={to} className="admin-nav__link">
+                <Link
+                  key={label}
+                  to={to}
+                  className="admin-nav__link"
+                  onClick={() => setNavOpen(false)}
+                >
                   {label}
                 </Link>
               ) : (

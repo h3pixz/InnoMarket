@@ -171,3 +171,11 @@
 .sort-bar__option--active {
   color: #e55a63;
 }
+
+@media (max-width: 480px) {
+  .filter-dropdown__panel {
+    min-width: 0;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+  }
+}

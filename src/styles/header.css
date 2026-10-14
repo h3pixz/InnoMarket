@@ -122,3 +122,61 @@
   border: 0;
   cursor: pointer;
 }
+
+.header__burger {
+  display: none;
+  padding: 0;
+  font-size: 22px;
+  color: #ffffff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+  }
+
+  .header__bar {
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .header__burger {
+    display: flex;
+  }
+
+  .header__searchbox {
+    flex-basis: 100%;
+  }
+
+  .header__search {
+    width: 100%;
+  }
+
+  .header__navrow {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .header__navrow--open {
+    display: flex;
+  }
+
+  .header__nav {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .header__actions {
+    justify-content: flex-start;
+  }
+}

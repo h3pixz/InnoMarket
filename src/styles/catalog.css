@@ -28,3 +28,20 @@
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
 }
+
+@media (max-width: 1024px) {
+  .catalog-layout {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-layout {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .catalog {
+    padding: 16px;
+  }
+}

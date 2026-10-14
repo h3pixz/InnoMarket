@@ -105,6 +105,16 @@
   font-size: 14px;
 }
 
+.admin-burger {
+  display: none;
+  padding: 0;
+  font-size: 20px;
+  color: #ffffff;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
 .admin-main {
   padding: 48px;
 }
@@ -205,6 +215,11 @@
 .admin-delete:disabled {
   color: #c4c4c4;
   cursor: default;
+}
+
+.admin-table__scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .admin-table {
@@ -331,4 +346,74 @@
 .admin-note {
   margin: 24px 0 0;
   color: #8a8a8a;
+}
+
+@media (max-width: 1024px) {
+  .admin-header__left {
+    gap: 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-header {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px 16px;
+  }
+
+  .admin-header__left {
+    flex: 1;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .admin-brand {
+    flex: 1;
+  }
+
+  .admin-burger {
+    display: flex;
+  }
+
+  .admin-nav {
+    display: none;
+    flex-basis: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .admin-nav--open {
+    display: flex;
+  }
+
+  .admin-nav__link {
+    padding: 6px 0;
+  }
+
+  .admin-header__right {
+    gap: 12px;
+  }
+
+  .admin-main {
+    padding: 24px 16px;
+  }
+
+  .admin-card {
+    padding: 16px;
+  }
+
+  .admin-card__header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-card__tools {
+    width: 100%;
+    height: auto;
+    flex-wrap: wrap;
+  }
+
+  .admin-table {
+    min-width: 640px;
+  }
 }

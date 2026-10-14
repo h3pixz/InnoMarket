@@ -131,73 +131,77 @@ export default function AdminItemsPage() {
       {isError && <p className="admin-note">Failed to load items</p>}
 
       {products.length > 0 && (
-        <table className="admin-table">
-          <thead>
-            <tr>
-              <th className="admin-table__check">
-                <input
-                  type="checkbox"
-                  aria-label="Select all"
-                  checked={allSelected}
-                  onChange={toggleAll}
-                />
-              </th>
-              <th>Name</th>
-              <th>Items</th>
-              <th>Category</th>
-              <th>Subcategory</th>
-              <th>Storage</th>
-              <th>Status</th>
-              <th className="admin-table__actions" aria-label="Actions" />
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((row) => (
-              <tr key={row.product.id}>
-                <td className="admin-table__check">
+        <div className="admin-table__scroll">
+          <table className="admin-table">
+            <thead>
+              <tr>
+                <th className="admin-table__check">
                   <input
                     type="checkbox"
-                    aria-label={`Select ${row.product.title}`}
-                    checked={selectedIds.includes(row.product.id)}
-                    onChange={() => toggleRow(row.product.id)}
+                    aria-label="Select all"
+                    checked={allSelected}
+                    onChange={toggleAll}
                   />
-                </td>
-                <td>
-                  <div className="admin-table__name">
-                    <img
-                      className="admin-table__thumb"
-                      src={row.product.thumbnail}
-                      alt=""
-                    />
-                    <span className="admin-table__title">
-                      {row.product.title}
-                    </span>
-                  </div>
-                </td>
-                <td>{row.items}</td>
-                <td>{row.category}</td>
-                <td>{row.subcategory}</td>
-                <td className="admin-table__storage">{row.storage}</td>
-                <td>
-                  <span className={`admin-status admin-status--${row.statusKey}`}>
-                    {row.status}
-                  </span>
-                </td>
-                <td className="admin-table__actions">
-                  <button
-                    type="button"
-                    className="admin-table__delete"
-                    aria-label={`Delete ${row.product.title}`}
-                    onClick={() => handleDeleteRow(row.product.id)}
-                    disabled={!addedIds.has(row.product.id)}
-                  >
-                    <FaTrashAlt />
-                  </button>
-                </td>
+                </th>
+                <th>Name</th>
+                <th>Items</th>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Storage</th>
+                <th>Status</th>
+                <th className="admin-table__actions" aria-label="Actions" />
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filtered.map((row) => (
+                <tr key={row.product.id}>
+                  <td className="admin-table__check">
+                    <input
+                      type="checkbox"
+                      aria-label={`Select ${row.product.title}`}
+                      checked={selectedIds.includes(row.product.id)}
+                      onChange={() => toggleRow(row.product.id)}
+                    />
+                  </td>
+                  <td>
+                    <div className="admin-table__name">
+                      <img
+                        className="admin-table__thumb"
+                        src={row.product.thumbnail}
+                        alt=""
+                      />
+                      <span className="admin-table__title">
+                        {row.product.title}
+                      </span>
+                    </div>
+                  </td>
+                  <td>{row.items}</td>
+                  <td>{row.category}</td>
+                  <td>{row.subcategory}</td>
+                  <td className="admin-table__storage">{row.storage}</td>
+                  <td>
+                    <span
+                      className={`admin-status admin-status--${row.statusKey}`}
+                    >
+                      {row.status}
+                    </span>
+                  </td>
+                  <td className="admin-table__actions">
+                    <button
+                      type="button"
+                      className="admin-table__delete"
+                      aria-label={`Delete ${row.product.title}`}
+                      onClick={() => handleDeleteRow(row.product.id)}
+                      disabled={!addedIds.has(row.product.id)}
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
 
       {products.length > 0 && !filtered.length && (

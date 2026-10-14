@@ -207,3 +207,42 @@
   line-height: 1.6;
   color: #6b7280;
 }
+
+@media (max-width: 1024px) {
+  .product-gallery {
+    width: 340px;
+  }
+
+  .product-detail__layout {
+    gap: 24px;
+  }
+
+  .product-detail__specs {
+    gap: 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-detail {
+    padding: 16px;
+  }
+
+  .product-detail__layout {
+    flex-direction: column;
+  }
+
+  .product-gallery {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-detail__actions {
+    flex-wrap: wrap;
+  }
+
+  .product-detail__cart {
+    flex: 1;
+    padding: 14px 20px;
+  }
+}

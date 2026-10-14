@@ -31,3 +31,17 @@
   line-height: 1.7;
   color: #6b7280;
 }
+
+@media (max-width: 768px) {
+  .merchant {
+    padding: 16px;
+  }
+
+  .merchant__card {
+    padding: 24px;
+  }
+
+  .merchant__title {
+    font-size: 24px;
+  }
+}
