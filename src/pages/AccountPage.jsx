@@ -14,6 +14,7 @@ export default function AccountPage() {
 
   if (!user) return <Navigate to="/login" replace />;
 
+  const isAdmin = user.username === 'admin';
   const profile = data?.users.find((item) => item.id === user.id);
   const address = profile?.address;
 
@@ -64,6 +65,11 @@ export default function AccountPage() {
           <Link className="account__link" to="/likes">
             Favorites
           </Link>
+          {isAdmin && (
+            <Link className="account__link" to="/admin">
+              Admin panel
+            </Link>
+          )}
         </div>
 
         <button className="account__logout" type="button" onClick={handleLogout}>
