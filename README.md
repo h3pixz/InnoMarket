@@ -84,3 +84,14 @@ DummyJSON only provides product `title`, `brand`, `price`, `discountPercentage`,
 ## Deployment
 
 Deployed on Netlify (`innomarket.netlify.app`). The build is configured in `netlify.toml` (`npm run build` → publish `dist/`, with an SPA fallback rewrite so client-side routes resolve on direct load). Pushing to `main` triggers a rebuild and redeploy.
+
+## Quality
+
+Lighthouse, run in Chrome against the production build:
+
+| Category | Score |
+| --- | --- |
+| Performance | 95 |
+| Accessibility | 91 |
+| Best Practices | 100 |
+| SEO | 92 |
