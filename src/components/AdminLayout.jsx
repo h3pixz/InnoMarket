@@ -5,7 +5,7 @@ import logo from '../assets/logo.png';
 import '../styles/admin.css';
 
 const NAV = [
-  { label: 'Maintain Items' },
+  { label: 'Maintain Items', to: '/admin' },
   { label: 'Master Data' },
   { label: 'User Management', to: '/admin/users/new' },
   { label: 'Reporting' },
