@@ -7,11 +7,9 @@ const CATEGORIES = [
   { label: 'Apparel' },
   {
     label: 'Accessories',
-    defaultOpen: true,
     children: [
       {
         label: 'Belts',
-        defaultOpen: true,
         children: [{ label: 'Leather belts' }],
       },
     ],
@@ -21,7 +19,7 @@ const CATEGORIES = [
 ];
 
 function CategoryItem({ category, level }) {
-  const [open, setOpen] = useState(Boolean(category.defaultOpen));
+  const [open, setOpen] = useState(false);
   const hasChildren = Boolean(category.children?.length);
 
   return (
